@@ -14,3 +14,36 @@
   height: auto;
   max-width: 45%;
 }
+
+.hero {
+  padding: 7rem 0;
+}
+
+.hook {
+  color: rgb(109, 255, 99) !important ;
+}
+
+svg g {
+  fill: #6dff63 !important;
+}
+
+.slogan {
+  background: #28f1ff;
+  padding: 8px;
+  border-radius: 40px;
+}
+
+// scrollbar style
+body::-webkit-scrollbar {
+  width: 15px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255); /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #6dff63; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #6dff63; /* creates padding around scroll thumb */
+}

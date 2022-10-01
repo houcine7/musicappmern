@@ -7,6 +7,9 @@ import Home from "./components/Home";
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
 
+//api imports
+import { valideUser } from "./api";
+//
 function App() {
   //to track user sign in state
   const authentication = getAuth(app);
@@ -18,6 +21,9 @@ function App() {
   useEffect(() => {
     const userToken = localStorage.getItem("loggedInUser");
     console.log(userToken);
+    valideUser(userToken).then((res) => {
+      console.log(res);
+    });
     if (userToken !== null) {
       setLoggedIn(true);
     } else {
