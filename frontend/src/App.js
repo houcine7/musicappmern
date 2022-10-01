@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.scss";
 import Login from "./components/login";
-
+import Home from "./components/Home";
 // firebase imports
 import { app } from "./config/firebase.config";
 import { getAuth } from "firebase/auth";
@@ -32,6 +32,14 @@ function App() {
         element={
           <>
             <Login loggedIn={loggedIn} />
+          </>
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <>
+            <Home />
           </>
         }
       />
