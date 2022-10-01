@@ -1,8 +1,13 @@
-import React from "react";
-
+import { useEffect } from "react";
+import { useStateValue } from "../context/contextProvider";
 const navConstant = ["home", "music", "contact us"];
 
 const Nav = () => {
+  //get user info
+  const [{ user }, dispatch] = useStateValue();
+  useEffect(() => {}, [user]);
+
+  //
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div className="container-fluid">
@@ -60,12 +65,12 @@ const Nav = () => {
             >
               <img
                 className="rounded-circle img-fluid profileimage"
-                src="./user.png"
+                src={(user && user.imageURL) || "./user.png"}
                 alt="userpic"
                 style={{ width: "75px" }}
               />
               <div className="d-flex flex-column">
-                <strong className="username">houcine7</strong>
+                <strong className="username">{user && user.name}</strong>
                 <h6 className="title">premuim</h6>
               </div>
             </div>

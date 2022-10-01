@@ -7,13 +7,14 @@ import { app } from "../config/firebase.config.js";
 
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
+import { useStateValue } from "../context/contextProvider.js";
+import { valideUser } from "../api/index.js";
 const Login = ({ loggedIn }) => {
+  const [{ user }, dispatch] = useStateValue();
   //init navigation
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    console.log(loggedIn);
-    // go to home page when u already logged in
     loggedIn && navigateTo("/", { replace: true });
   }, [loggedIn]);
 
@@ -27,10 +28,14 @@ const Login = ({ loggedIn }) => {
     try {
       const user = await signInWithPopup(fireAuthentication, provider);
       if (user) {
-        localStorage.setItem(
-          "loggedInUser",
-          (await user.user.getIdToken()).toString()
-        );
+        const userToken = await user.user.getIdToken();
+        localStorage.setItem("loggedInUser", userToken.toString());
+        valideUser(userToken).then((data) => {
+          dispatch({
+            type: "SET_USER",
+            user: data.msg,
+          });
+        });
         navigateTo("/", { replace: true });
       }
     } catch (error) {
