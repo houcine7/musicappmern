@@ -23,16 +23,20 @@ function App() {
   // limit access to login page
   useEffect(() => {
     const userToken = localStorage.getItem("loggedInUser");
-
-    valideUser(userToken).then((data) => {
-      console.log("validating user ");
-      dispatch({
-        type: "SET_USER",
-        user: data.msg,
-      });
-    });
     if (userToken !== null) {
       setLoggedIn(true);
+      authentication.onAuthStateChanged((userInfo) => {
+        if (userInfo) {
+          userInfo.getIdToken().then((token) => {
+            valideUser(token).then((data) => {
+              dispatch({
+                type: "SET_USER",
+                user: data.msg,
+              });
+            });
+          });
+        }
+      });
     } else {
       setLoggedIn(false);
       dispatch({

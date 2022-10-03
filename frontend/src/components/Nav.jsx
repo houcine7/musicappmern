@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useStateValue } from "../context/contextProvider";
+import { Fade } from "react-awesome-reveal";
 const navConstant = ["home", "music", "contact us"];
 
 const Nav = () => {
@@ -29,9 +30,9 @@ const Nav = () => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2  mb-lg-0 ulitems">
-            {navConstant.map((item) => {
+            {navConstant.map((item, index) => {
               return (
-                <li className="nav-item">
+                <li className="nav-item" key={index}>
                   <a className="nav-link active" aria-current="page" href="#">
                     {item}
                   </a>
@@ -58,7 +59,7 @@ const Nav = () => {
           </form> */}
           <div className="navbar-nav mb-2 mb-lg-0 mr-3 mr-lg-0 profile">
             <div
-              className="d-flex justify-content-aroound align-items-center"
+              className="profile-nav d-flex justify-content-aroound align-items-center"
               id="triggerId"
               data-toggle="dropdown"
               aria-haspopup="true"
@@ -67,6 +68,7 @@ const Nav = () => {
                 className="rounded-circle img-fluid profileimage"
                 src={(user && user.imageURL) || "./user.png"}
                 alt="userpic"
+                referrerPolicy="no-referrer"
                 style={{ width: "75px" }}
               />
               <div className="d-flex flex-column">
@@ -76,21 +78,21 @@ const Nav = () => {
             </div>
 
             <div
-              class="dropdown-menu dropdown-menu-right"
+              className="dropdown-menu dropdown-menu-right"
               aria-labelledby="triggerId"
             >
-              <a class="dropdown-item" href="#">
+              <a className="dropdown-item" href="#">
                 Action
               </a>
-              <a class="dropdown-item disabled" href="#">
+              <a className="dropdown-item disabled" href="#">
                 Disabled action
               </a>
-              <h6 class="dropdown-header">Section header</h6>
-              <a class="dropdown-item" href="#">
+              <h6 className="dropdown-header">Section header</h6>
+              <a className="dropdown-item" href="#">
                 Action
               </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" href="#">
                 After divider action
               </a>
             </div>

@@ -16,6 +16,6 @@ export const valideUser = async (token) => {
 
     return res.data;
   } catch (error) {
-    return null;
+    console.log("error: " + error);
   }
 };

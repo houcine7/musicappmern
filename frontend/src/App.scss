@@ -47,3 +47,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 3px solid #6dff63; /* creates padding around scroll thumb */
 }
+
+.profile-nav {
+  cursor: pointer;
+}
