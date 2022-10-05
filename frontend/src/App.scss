@@ -51,3 +51,16 @@ body::-webkit-scrollbar-thumb {
 .profile-nav {
   cursor: pointer;
 }
+
+.logout:hover {
+  background: linear-gradient(#6dff63, #28f1ff);
+}
+
+.logout {
+  border-radius: 9px;
+  text-align: center;
+}
+
+.dropdown-item {
+  font-weight: 500 !important;
+}

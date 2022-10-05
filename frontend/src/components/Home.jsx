@@ -2,11 +2,11 @@ import React from "react";
 import Nav from "./Nav";
 import Hero from "./Hero";
 
-const Home = () => {
+const Home = ({ setLoggedIn }) => {
   return (
     <>
       <div className="position-relative">
-        <Nav />
+        <Nav setLoggedIn={setLoggedIn} />
       </div>
 
       <Hero />

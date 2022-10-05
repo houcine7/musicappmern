@@ -1,7 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const userRoute = require("./Routes/auth");
 const { connectToDbAtlas } = require("./db/config");
+const userRoute = require("./Routes/auth");
+const artistsRoute = require("./Routes/artists");
+const songsRoute = require("./Routes/songs");
+const albumsRoute = require("./Routes/albums");
 
 //my app
 const app = express();
@@ -9,7 +12,19 @@ const app = express();
 //config
 require("dotenv").config();
 app.use(cors({ origin: true }));
+app.use(express.json());
+
+// users routing
 app.use("/api/users", userRoute);
+
+// songs routing
+app.use("/api/songs", songsRoute);
+
+// artist routing
+app.use("/api/artists", artistsRoute);
+
+// album routing
+app.use("/api/albums", albumsRoute);
 
 //connect to db
 connectToDbAtlas();

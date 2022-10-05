@@ -11,6 +11,7 @@ import { getAuth } from "firebase/auth";
 import { valideUser } from "./api";
 //context
 import { useStateValue } from "./context/contextProvider";
+import DashBoard from "./components/DashBoard";
 function App() {
   //to track user sign in state
   const authentication = getAuth(app);
@@ -22,7 +23,8 @@ function App() {
 
   // limit access to login page
   useEffect(() => {
-    const userToken = localStorage.getItem("loggedInUser");
+    console.log(".....");
+    const userToken = localStorage.getItem("loggedInUser") || null;
     if (userToken !== null) {
       setLoggedIn(true);
       authentication.onAuthStateChanged((userInfo) => {
@@ -38,6 +40,7 @@ function App() {
         }
       });
     } else {
+      console.log("fhfhhf");
       setLoggedIn(false);
       dispatch({
         type: "SET_USER",
@@ -45,7 +48,7 @@ function App() {
       });
       navigateTo("/login", { replace: true });
     }
-  }, []);
+  }, [loggedIn]);
   //
   return (
     <Routes>
@@ -61,10 +64,11 @@ function App() {
         path="/"
         element={
           <>
-            <Home />
+            <Home setLoggedIn={setLoggedIn} />
           </>
         }
       />
+      <Route path="/dashboard/*" element={<DashBoard />} />
     </Routes>
   );
 }

@@ -1,14 +1,28 @@
 import { useEffect } from "react";
 import { useStateValue } from "../context/contextProvider";
-import { Fade } from "react-awesome-reveal";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 const navConstant = ["home", "music", "contact us"];
 
-const Nav = () => {
+const Nav = ({ setLoggedIn }) => {
+  const navigateTo = useNavigate();
   //get user info
   const [{ user }, dispatch] = useStateValue();
-  useEffect(() => {}, [user]);
 
-  //
+  //logout function
+  const logout = () => {
+    const authentication = getAuth();
+    authentication
+      .signOut()
+      .then(() => {
+        localStorage.clear();
+        navigateTo("/login", { replace: true });
+      })
+      .catch((error) => console.log(error));
+
+    //
+  };
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div className="container-fluid">
@@ -82,19 +96,18 @@ const Nav = () => {
               aria-labelledby="triggerId"
             >
               <a className="dropdown-item" href="#">
-                Action
+                Profile
               </a>
-              <a className="dropdown-item disabled" href="#">
-                Disabled action
-              </a>
-              <h6 className="dropdown-header">Section header</h6>
               <a className="dropdown-item" href="#">
-                Action
+                My Playlist
+              </a>
+              <a className="dropdown-item" href="./dashboard/home">
+                Dashboard
               </a>
               <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">
-                After divider action
-              </a>
+              <button className="dropdown-item logout" onClick={logout}>
+                logout
+              </button>
             </div>
           </div>
         </div>
