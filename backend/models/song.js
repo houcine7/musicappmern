@@ -15,7 +15,7 @@ const songSchema = mongoose.Schema(
       required: true,
     },
     category: {
-      type: String,
+      type: Array,
       required: true,
     },
     imageURL: {
