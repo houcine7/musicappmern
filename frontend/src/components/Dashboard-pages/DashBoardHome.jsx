@@ -4,9 +4,8 @@ import { CardsContent } from "../../data/CardsDashboardData";
 import { useStateValue } from "../../context/contextProvider";
 
 import { getSongs, getUsers, getAlbums, getArtists } from "../../api/index";
+//card componenet
 const DashboardCard = ({ image, name, stats }) => {
-  // states
-
   //
   return (
     <div
@@ -27,6 +26,7 @@ const DashboardCard = ({ image, name, stats }) => {
   );
 };
 
+//dboard home
 const DashBoardHome = () => {
   const [{ allUsers, allSongs, allAlbums, allArtists }, dispatch] =
     useStateValue();
