@@ -64,3 +64,31 @@ body::-webkit-scrollbar-thumb {
 .dropdown-item {
   font-weight: 500 !important;
 }
+
+//dashboard
+
+.dashboard-links {
+  padding-top: 7rem;
+  padding-bottom: 2rem;
+  background-color: rgb(236, 236, 236);
+}
+
+.nav-dash {
+  padding: 1rem 2rem;
+  width: 60%;
+}
+.mylink {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  text-decoration: none;
+}
+
+.linkDashboard {
+  transition: 0.7s;
+  color: rgb(1, 77, 81) !important;
+}
+.active {
+  color: black !important;
+  scale: 1.1 !important;
+}

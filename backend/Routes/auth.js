@@ -5,6 +5,18 @@ const admin = require("../config/firebase.config");
 //
 const user = require("../models/user");
 const { insertUserToDb, updateUserAuthTime } = require("../models/dbFunctions");
+
+//get All users
+router.get("/getAllUsers", async (req, res) => {
+  try {
+    const result = await user.find().sort({ createdAt: 1 });
+    return res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+//login route
 router.get("/login", async (req, res) => {
   //
   if (!req.headers.authorization) {

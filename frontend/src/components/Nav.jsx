@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const navConstant = ["home", "music", "contact us"];
-
+const urlLogo = "http://localhost:3000/logo.png";
 const Nav = ({ setLoggedIn }) => {
   const navigateTo = useNavigate();
   //get user info
@@ -27,7 +27,7 @@ const Nav = ({ setLoggedIn }) => {
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <img className="logo" src="./logo.png" alt="" loading="lazy" />
+          <img className="logo" src={urlLogo} alt="logo" loading="lazy" />
         </a>
 
         <button

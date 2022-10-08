@@ -7,7 +7,7 @@ const song = require("../models/song");
 router.get("/getAll", async (req, res) => {
   try {
     const result = await song.find().sort({ createdAt: 1 });
-    return res.status(200).json({ success: true, response: result });
+    return res.status(200).json({ success: true, data: result });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
   }
@@ -58,6 +58,37 @@ router.delete("/deletSong/:id", async (req, res) => {
     return res.status(200).json({ success: false, response: result });
   } catch (error) {
     return res.status(400).json({ success: false, error: "song not found " });
+  }
+});
+
+// edit an existing song by id
+router.put("/updateSong/:id", async (req, res) => {
+  //
+  try {
+    const idSong = req.params.id;
+    const { name, songURL, imageURL, artist, language, category, album } =
+      req.body;
+    const result = await song.findOneAndUpdate(
+      { _id: `${idSong}` },
+      {
+        name: name,
+        songURL: songURL,
+        imageURL: imageURL,
+        artist: artist,
+        language: language,
+        category: category,
+        album: album,
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+    return res.status(200).json({ success: true, response: result });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ success: false, error: "can't found a song with id " + id });
   }
 });
 

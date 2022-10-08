@@ -7,7 +7,7 @@ router.get("/getAll", async (req, res) => {
   try {
     const allAtists = await artist.find().sort({ createdAt: 1 });
 
-    return res.status(200).json({ success: true, artists: allAtists });
+    return res.status(200).json({ success: true, data: allAtists });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ success: false, error: "not found" });

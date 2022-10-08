@@ -23,7 +23,6 @@ function App() {
 
   // limit access to login page
   useEffect(() => {
-    console.log(".....");
     const userToken = localStorage.getItem("loggedInUser") || null;
     if (userToken !== null) {
       setLoggedIn(true);
@@ -40,7 +39,6 @@ function App() {
         }
       });
     } else {
-      console.log("fhfhhf");
       setLoggedIn(false);
       dispatch({
         type: "SET_USER",
