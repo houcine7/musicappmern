@@ -62,8 +62,8 @@ const DashBoardHome = () => {
         const data = await getArtists().then((users) => users);
         CardsContent[1].states = data.length;
         dispatch({
-          type: "SET_ALL_ALBUMS",
-          allAlbums: data,
+          type: "SET_ALL_ARTISTS",
+          allArtists: data,
         });
       }
     };

@@ -92,3 +92,9 @@ body::-webkit-scrollbar-thumb {
   color: black !important;
   scale: 1.1 !important;
 }
+
+/**/
+input:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0.25rem rgb(109, 255, 99) !important;
+}

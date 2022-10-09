@@ -9,6 +9,7 @@ import DashboardUsers from "./Dashboard-pages/DashboardUsers";
 import DashboardSongs from "./Dashboard-pages/DashboardSongs";
 import DashboardArtist from "./Dashboard-pages/DashboardArtist";
 import DashboardAlbums from "./Dashboard-pages/DashboardAlbums";
+import AddSong from "./Dashboard-pages/AddSong";
 const constant = [
   <AiFillHome style={{ fontSize: "40px" }} />,
   "Users",
@@ -18,12 +19,14 @@ const constant = [
 ];
 const DashBoard = () => {
   return (
-    <div className="position-relative dashboard-links">
-      <Nav />
-      <div className="container nav-dash d-flex justify-content-evenly align-items-center ">
-        {constant.map((item, index) => (
-          <DashboardLinks children={item} key={index} index={index} />
-        ))}
+    <>
+      <div className="position-relative dashboard-links">
+        <Nav />
+        <div className="container nav-dash d-flex justify-content-evenly align-items-center ">
+          {constant.map((item, index) => (
+            <DashboardLinks children={item} key={index} index={index} />
+          ))}
+        </div>
       </div>
       <div className="pt-5">
         <Routes>
@@ -32,9 +35,10 @@ const DashBoard = () => {
           <Route path="/songs" element={<DashboardSongs />} />
           <Route path="/artists" element={<DashboardArtist />} />
           <Route path="/albums" element={<DashboardAlbums />} />
+          <Route path="songs/addsong" element={<AddSong />} />
         </Routes>
       </div>
-    </div>
+    </>
   );
 };
 

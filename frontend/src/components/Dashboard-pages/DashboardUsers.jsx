@@ -4,8 +4,8 @@ import { useStateValue } from "../../context/contextProvider";
 const DashboardUsers = () => {
   const [{ allUsers }, dispatch] = useStateValue();
   return (
-    <div className="container d-flex flex-column">
-      <table className="table">
+    <div className="container table-responsive ">
+      <table className="table ">
         <thead>
           <tr>
             <th scope="col">Image</th>
