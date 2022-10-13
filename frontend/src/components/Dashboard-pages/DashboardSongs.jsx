@@ -23,7 +23,7 @@ const DashboardSongs = () => {
           </strong>
           <input
             type="text"
-            className="form-control"
+            className="form-control searchfield"
             placeholder="Search song"
             style={{ width: "30%" }}
             onChange={(e) => setFilter(e.target.value)}
@@ -41,6 +41,7 @@ const DashboardSongs = () => {
           <div className="d-flex flex-wrap justify-content-around align-items-center ">
             {allSongs?.map((song, index) => (
               <SongsCard
+                key={index}
                 name={song.name}
                 image={song.imageURL}
                 artist={allArtists.map((artist) => {

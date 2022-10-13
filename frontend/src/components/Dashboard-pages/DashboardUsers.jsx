@@ -16,8 +16,8 @@ const DashboardUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers?.map((user) => (
-            <tr>
+          {allUsers?.map((user, index) => (
+            <tr key={index}>
               <td>
                 <img
                   src={user.imageURL}

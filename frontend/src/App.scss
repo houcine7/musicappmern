@@ -94,7 +94,37 @@ body::-webkit-scrollbar-thumb {
 }
 
 /**/
-input:focus {
+.earchfield:focus {
   outline: none !important;
   box-shadow: 0 0 0 0.25rem rgb(109, 255, 99) !important;
+}
+
+.custom-select {
+  word-wrap: normal;
+  padding: 0.2rem 1.5rem;
+  font-weight: 500;
+  border: 1px solid #ced4da;
+}
+
+.custom-select:focus {
+  border-color: #3ef2fe !important;
+}
+
+.btn-upload {
+  background-color: #6dff63 !important;
+  font-weight: 500;
+}
+
+.shadow-box {
+  box-shadow: 7px 0px 0px 0px rgb(0 0 0 / 20%);
+}
+
+/*lOADER */
+.sl-bubble2 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 85;
+  left: -6%;
+  background: #0000001f;
 }
