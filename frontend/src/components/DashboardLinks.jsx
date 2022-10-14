@@ -27,7 +27,6 @@ const DashboardLinks = ({ children, index }) => {
     document.querySelector(".active")?.classList.remove("active");
     e.target.classList.remove("linkDashboard");
     e.target.classList.add("active");
-    console.log(e.target.classList);
   };
 
   return (

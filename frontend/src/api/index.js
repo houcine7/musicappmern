@@ -69,3 +69,16 @@ export const getArtists = async () => {
     return;
   }
 };
+
+// save song to db
+
+export const saveSong = async (data) => {
+  //
+  try {
+    const result = await axios.post(apiURL + "api/songs/addSong", data);
+    return result.data.msg;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};

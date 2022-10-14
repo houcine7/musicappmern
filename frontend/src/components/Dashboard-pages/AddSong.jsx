@@ -17,9 +17,11 @@ import {
 
 import { database } from "../../config/firebase.config";
 
+//api method
+import { saveSong } from "../../api";
 //cte
 const initialState = {
-  songName: "",
+  name: "",
   artist: "",
   category: "",
   album: "",
@@ -30,6 +32,7 @@ const initialState = {
 const AddSong = () => {
   const [{ allArtists, allAlbums }, dispatch] = useStateValue();
   const [formState, setFormStates] = useState(initialState);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handelChange = (e) => {
     setFormStates((prevForm) => {
@@ -38,20 +41,30 @@ const AddSong = () => {
         [e.target.name]: e.target.value,
       };
     });
-    console.log(formState);
+  };
+  const handelSubmit = (e) => {
+    //
+    e.preventDefault();
+    saveSong(formState).then((result) => {
+      //
+      setFormSubmitted(false);
+      setFormStates(initialState);
+    });
+
+    setFormSubmitted(true);
   };
 
   return (
     <div className="container-fluid border ">
       <div className="row">
         <div className=" pb-5 col-lg-12">
-          <form>
-            <label htmlFor="songname mb-5">song name</label>
+          <form onSubmit={(e) => handelSubmit(e)}>
+            <label htmlFor="name mb-5">song name</label>
             <input
               type="text"
               className="form-control mb-3 mt-1"
-              name="songName"
-              id="songname"
+              name="name"
+              id="name"
               required
               aria-describedby="helpId"
               placeholder="song name goes here"
@@ -85,11 +98,20 @@ const AddSong = () => {
               className="row justify-content-center"
               style={{ marginTop: "2rem" }}
             >
-              <UploadForm name={"image"} />
-              <UploadForm name={"song"} />
+              <UploadForm name={"image"} handelChange={setFormStates} />
+              <UploadForm name={"song"} handelChange={setFormStates} />
             </div>
             <div className="d-flex justify-content-end">
-              <button className="btn btn-lg btn-primary"> Add song</button>
+              <button className="btn btn-primary btn-lg">
+                {formSubmitted && (
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                )}
+                {formSubmitted ? "Adding song ..." : "Add song"}
+              </button>
             </div>
           </form>
         </div>
@@ -137,6 +159,21 @@ const UploadForm = ({ name, handelChange }) => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           //download url
           setUploadedURL(downloadURL);
+          if (name === "image") {
+            handelChange((prevState) => {
+              return {
+                ...prevState,
+                imageURL: downloadURL,
+              };
+            });
+          } else {
+            handelChange((prevState) => {
+              return {
+                ...prevState,
+                songURL: downloadURL,
+              };
+            });
+          }
           setLoading(false);
         });
       }

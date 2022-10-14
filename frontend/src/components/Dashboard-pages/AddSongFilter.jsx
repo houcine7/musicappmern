@@ -14,11 +14,19 @@ const AddSongFilter = ({ name, data, handelChange }) => {
       >
         <option value="">Choose {name}</option>
         {data?.map((item, index) => {
-          return (
-            <option value={item.value ? item.value : item.name} key={index}>
-              {item.name}
-            </option>
-          );
+          if (name === "artist" || name === "album") {
+            return (
+              <option value={item._id} key={index}>
+                {item.name}
+              </option>
+            );
+          } else {
+            return (
+              <option value={item.value ? item.value : item.name} key={index}>
+                {item.name}
+              </option>
+            );
+          }
         })}
       </select>
     </>

@@ -32,6 +32,7 @@ router.post("/addSong", async (req, res) => {
     const result = await songToAdd.save();
     return res.status(200).json({ success: true, msg: result });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ success: false, error: error.message });
   }
 });
