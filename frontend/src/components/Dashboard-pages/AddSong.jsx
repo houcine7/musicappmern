@@ -4,6 +4,7 @@ import AddSongFilter from "./AddSongFilter";
 import { useStateValue } from "../../context/contextProvider";
 
 import Loader from "react-js-loader";
+import { MdDeleteForever } from "react-icons/md";
 
 //firebase imports
 import {
@@ -15,6 +16,7 @@ import {
 } from "firebase/storage";
 
 import { database } from "../../config/firebase.config";
+
 //cte
 const initialState = {
   songName: "",
@@ -50,6 +52,7 @@ const AddSong = () => {
               className="form-control mb-3 mt-1"
               name="songName"
               id="songname"
+              required
               aria-describedby="helpId"
               placeholder="song name goes here"
               onChange={(e) => {
@@ -84,6 +87,9 @@ const AddSong = () => {
             >
               <UploadForm name={"image"} />
               <UploadForm name={"song"} />
+            </div>
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-lg btn-primary"> Add song</button>
             </div>
           </form>
         </div>
@@ -137,6 +143,17 @@ const UploadForm = ({ name, handelChange }) => {
     );
   };
 
+  // delete image
+
+  const deleteImage = () => {
+    setLoading(true);
+    const deleteReference = ref(database, uploadedURL);
+    deleteObject(deleteReference).then(() => {
+      setLoading(false);
+      setUploadedURL("");
+    });
+  };
+
   return (
     <div
       className="form-group col-md-6 mb-2 "
@@ -149,7 +166,7 @@ const UploadForm = ({ name, handelChange }) => {
         {isLoading && (
           <Loader type={"bubble-top"} bgColor={"#6dff63"} size={60} />
         )}
-        {!isLoading && (
+        {!isLoading && uploadedURL == "" && (
           <>
             <input
               name={name + "URL"}
@@ -179,9 +196,27 @@ const UploadForm = ({ name, handelChange }) => {
           </>
         )}
         {uploadedURL != "" && (
-          <>
-            <img src={uploadedURL} alt="image" className="image-fluid" />
-          </>
+          <div className="d-flex justify-content-evenly align-items-center">
+            {name == "image" ? (
+              <img
+                src={uploadedURL}
+                alt="image"
+                className="image-fluid"
+                style={{ maxWidth: "50%" }}
+              />
+            ) : (
+              <audio
+                src={uploadedURL}
+                controls
+                className="audio-fluid audio"
+              ></audio>
+            )}
+
+            <MdDeleteForever
+              style={{ fontSize: "40px", cursor: "pointer", color: "red" }}
+              onClick={deleteImage}
+            />
+          </div>
         )}
       </div>
     </div>

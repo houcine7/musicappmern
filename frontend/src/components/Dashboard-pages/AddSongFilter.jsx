@@ -6,6 +6,7 @@ const AddSongFilter = ({ name, data, handelChange }) => {
       <select
         className="custom-select"
         name={name}
+        required
         onChange={(e) => {
           console.log("on change");
           handelChange(e);
