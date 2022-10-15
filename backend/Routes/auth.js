@@ -47,6 +47,37 @@ router.get("/login", async (req, res) => {
   }
 });
 
+//delete user from db
+router.delete("/deleteUser/:id", async (req, res) => {
+  //
+  try {
+    const idUser = req.params.id;
+    const result = await user.deleteOne({ _id: idUser });
+    res.status(200).json({ success: true, msg: result });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
 // function to save user in db
+const insertUserToDb = async (userToAdd, res) => {
+  console.log("insertiiing");
+  try {
+    const newUser = new user({
+      user_id: userToAdd.user_id,
+      name: userToAdd.name,
+      email: userToAdd.email,
+      email_verified: userToAdd.email_verified,
+      imageURL: userToAdd.picture,
+      role: "member",
+      auth_time: userToAdd.auth_time,
+    });
+    const userSaved = await newUser.save();
+    return res.status(200).json({ msg: "user saved" });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
 module.exports = router;

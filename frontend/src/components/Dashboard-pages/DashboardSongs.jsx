@@ -62,9 +62,14 @@ const SongsCard = ({ image, name, artist }) => {
   return (
     <div
       className="card text-left align-items-center mb-3"
-      style={{ maxWidth: "200px", borderRadius: "15px" }}
+      style={{ width: "200px", borderRadius: "15px" }}
     >
-      <img className="card-img-top" src={image} alt="imgsong" />
+      <img
+        className="card-img-top"
+        src={image}
+        alt="imgsong"
+        style={{ height: "150px", width: "100%" }}
+      />
 
       <div className="w-100 d-flex justify-content-between align-items-center p-3">
         <div>
