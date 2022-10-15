@@ -53,31 +53,34 @@ router.delete("/deleteUser/:id", async (req, res) => {
   try {
     const idUser = req.params.id;
     const result = await user.deleteOne({ _id: idUser });
-    res.status(200).json({ success: true, msg: result });
+    res.status(200).json({ success: true, msg: "user deleted successelfy" });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ success: false, error: error.message });
   }
 });
 
-// function to save user in db
-const insertUserToDb = async (userToAdd, res) => {
-  console.log("insertiiing");
+// update use role
+router.put("/userRole/:id", async (req, res) => {
+  //
   try {
-    const newUser = new user({
-      user_id: userToAdd.user_id,
-      name: userToAdd.name,
-      email: userToAdd.email,
-      email_verified: userToAdd.email_verified,
-      imageURL: userToAdd.picture,
-      role: "member",
-      auth_time: userToAdd.auth_time,
-    });
-    const userSaved = await newUser.save();
-    return res.status(200).json({ msg: "user saved" });
+    const idUserToUpdate = req.params.id;
+    const { role } = req.body;
+    const result = await user.findOneAndUpdate(
+      { _id: `${idUserToUpdate}` },
+      {
+        role: role,
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+    res.status(200).json({ success: true, msg: result });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    console.log(error.message);
+    res.status(400).json({ success: false, error: error.message });
   }
-};
+});
 
 module.exports = router;

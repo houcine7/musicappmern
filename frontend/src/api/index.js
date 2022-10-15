@@ -32,6 +32,18 @@ export const getUsers = async () => {
   }
 };
 
+export const deleteUser = async (idUser) => {
+  try {
+    const result = await axios.delete(
+      apiURL + "api/users/deleteUser/" + idUser
+    );
+    return result.data.msg;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
 // fetchall songs from api
 
 export const getSongs = async () => {

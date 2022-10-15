@@ -2,19 +2,38 @@ import React from "react";
 import { useStateValue } from "../../context/contextProvider";
 import { MdDeleteForever } from "react-icons/md";
 
+import { deleteUser } from "../../api/index";
 import { FaUserEdit } from "react-icons/fa";
+import Alert from "../Alert";
+import { useState } from "react";
 
+const initialAlertState = {
+  display: "none",
+  msg: "",
+};
 const DashboardUsers = () => {
   const [{ allUsers }, dispatch] = useStateValue();
+  const [{ display, msg }, setAlert] = useState(initialAlertState);
 
   //function to delete user from db
-  const deleteUser = (id) => {
+  const handelDelete = async (id) => {
     //
     console.log("delte user:" + id);
+    deleteUser(id).then((msg) => {
+      //
+      setAlert((prevState) => {
+        return {
+          ...prevState,
+          display: "block",
+          msg: msg,
+        };
+      });
+    });
   };
   //
   return (
-    <div className="container table-responsive ">
+    <div className="container table-responsive position-relative">
+      <Alert display={display} msg={msg} />
       <table className="table ">
         <thead>
           <tr>
@@ -44,10 +63,13 @@ const DashboardUsers = () => {
                 {user.role}{" "}
                 <FaUserEdit style={{ fontSize: "40px", cursor: "pointer" }} />
               </td>
-              <td data-toggle="tooltip" title="Delete this user">
+              <td
+                data-toggle="tooltip"
+                title="Delete this user"
+                onClick={() => handelDelete(user._id)}
+              >
                 <MdDeleteForever
                   style={{ fontSize: "40px", cursor: "pointer", color: "red" }}
-                  onClick={() => deleteUser(user._id)}
                 />
               </td>
             </tr>

@@ -9,9 +9,6 @@ const DashboardSongs = () => {
   const [{ allSongs, allArtists }, dispatch] = useStateValue();
   const [filterSongs, setFilter] = useState("");
 
-  useEffect(() => {
-    const songsToShow = "";
-  }, [filterSongs]);
   return (
     <>
       <div className="container pt-3">
@@ -44,7 +41,7 @@ const DashboardSongs = () => {
                 key={index}
                 name={song.name}
                 image={song.imageURL}
-                artist={allArtists.map((artist) => {
+                artist={allArtists?.map((artist) => {
                   if (artist._id === song.artist) {
                     return artist.name;
                   }
