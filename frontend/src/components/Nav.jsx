@@ -55,22 +55,6 @@ const Nav = ({ setLoggedIn }) => {
             })}
           </ul>
 
-          {/* <form className="d-flex input-group w-auto">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Type query"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-primary"
-              type="button"
-              data-mdb-ripple-color="dark"
-              style={{ padding: ".45rem 1.5rem .35rem" }}
-            >
-              Search
-            </button>
-          </form> */}
           <div className="navbar-nav mb-2 mb-lg-0 mr-3 mr-lg-0 profile">
             <div
               className="profile-nav d-flex justify-content-aroound align-items-center"
@@ -101,9 +85,12 @@ const Nav = ({ setLoggedIn }) => {
               <a className="dropdown-item" href="#">
                 My Playlist
               </a>
-              <a className="dropdown-item" href="./dashboard/home">
-                Dashboard
-              </a>
+              {user?.role === "admin" && (
+                <a className="dropdown-item" href="./dashboard/home">
+                  Dashboard
+                </a>
+              )}
+
               <div className="dropdown-divider"></div>
               <button className="dropdown-item logout" onClick={logout}>
                 logout
