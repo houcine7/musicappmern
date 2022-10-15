@@ -32,11 +32,26 @@ export const getUsers = async () => {
   }
 };
 
+// delete user from db
 export const deleteUser = async (idUser) => {
   try {
     const result = await axios.delete(
       apiURL + "api/users/deleteUser/" + idUser
     );
+    return result.data.msg;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
+// update user role
+export const updateUserRole = async (id, role) => {
+  //
+  try {
+    const result = await axios.put(apiURL + "api/users/userRole/" + id, {
+      role: role,
+    });
     return result.data.msg;
   } catch (error) {
     console.log(error.message);
@@ -88,6 +103,18 @@ export const saveSong = async (data) => {
   //
   try {
     const result = await axios.post(apiURL + "api/songs/addSong", data);
+    return result.data.msg;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
+// delete song function
+
+export const deleteSong = async (id) => {
+  try {
+    const result = await axios.delete(apiURL + "api/songs/deleteSong/" + id);
     return result.data.msg;
   } catch (error) {
     console.log(error.message);

@@ -5,6 +5,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useStateValue } from "../../context/contextProvider";
 import { NavLink } from "react-router-dom";
 
+import { deleteSong } from "../../api";
 const DashboardSongs = () => {
   const [{ allSongs, allArtists }, dispatch] = useStateValue();
   const [filterSongs, setFilter] = useState("");
@@ -41,6 +42,7 @@ const DashboardSongs = () => {
                 key={index}
                 name={song.name}
                 image={song.imageURL}
+                songId={song._id}
                 artist={allArtists?.map((artist) => {
                   if (artist._id === song.artist) {
                     return artist.name;
@@ -55,7 +57,7 @@ const DashboardSongs = () => {
   );
 };
 
-const SongsCard = ({ image, name, artist }) => {
+const SongsCard = ({ image, name, artist, songId }) => {
   return (
     <div
       className="card text-left align-items-center mb-3"
@@ -75,6 +77,14 @@ const SongsCard = ({ image, name, artist }) => {
         </div>
         <MdDeleteForever
           style={{ fontSize: "30px", cursor: "pointer", color: "red" }}
+          onClick={() => {
+            deleteSong(songId)
+              .then((msg) => {
+                console.log(msg);
+                window.location.reload();
+              })
+              .catch((error) => {});
+          }}
         />
       </div>
     </div>

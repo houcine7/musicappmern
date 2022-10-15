@@ -43,8 +43,10 @@ const AddSong = () => {
     });
   };
   const handelSubmit = (e) => {
+    console.log(formState);
     //
     e.preventDefault();
+
     saveSong(formState).then((result) => {
       //
       setFormSubmitted(false);

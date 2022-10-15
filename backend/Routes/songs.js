@@ -51,12 +51,12 @@ router.get("/getSong/:id", async (req, res) => {
 
 // remove a song by its id
 
-router.delete("/deletSong/:id", async (req, res) => {
+router.delete("/deleteSong/:id", async (req, res) => {
   //
   try {
-    const idSong = req.params;
-    const result = await song.deleteOne({ _id: idSong });
-    return res.status(200).json({ success: false, response: result });
+    const idSong = req.params.id;
+    const result = await song.deleteOne({ _id: `${idSong}` });
+    return res.status(200).json({ success: false, msg: result });
   } catch (error) {
     return res.status(400).json({ success: false, error: "song not found " });
   }

@@ -76,7 +76,7 @@ router.put("/userRole/:id", async (req, res) => {
         new: true,
       }
     );
-    res.status(200).json({ success: true, msg: result });
+    res.status(200).json({ success: true, msg: "user updated successelfy " });
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ success: false, error: error.message });
