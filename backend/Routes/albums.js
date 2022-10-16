@@ -17,10 +17,11 @@ router.get("/getAll", async (req, res) => {
 router.post("/addAlbum", async (req, res) => {
   //
   try {
-    const { name, imageURL } = req.body;
+    const { name, imageURL, songsNumber } = req.body;
     const albumToAdd = album({
       name: name,
       imageURL: imageURL,
+      songsNumber: songsNumber,
     });
     const result = await albumToAdd.save();
     return res.status(200).json({ success: true, response: result });
@@ -61,13 +62,14 @@ router.put("/updateAlbum/:id", async (req, res) => {
   //
 
   try {
-    const { name, imageURL } = req.body;
+    const { name, imageURL, songsNumber } = req.body;
     const idAlbum = req.params.id;
     const result = await album.findOneAndUpdate(
       { _id: `${idAlbum}` },
       {
         name: name,
         imageURL: imageURL,
+        songsNumber: songsNumber,
       },
       { upsert: true, new: true }
     );

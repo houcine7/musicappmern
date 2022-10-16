@@ -10,6 +10,10 @@ const albumSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    songsNumber: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
