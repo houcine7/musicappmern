@@ -95,15 +95,21 @@ const DashboardUsers = () => {
                 {user.role}{" "}
                 <FaUserEdit style={{ fontSize: "40px", cursor: "pointer" }} />
               </td>
-              <td
-                data-toggle="tooltip"
-                title="Delete this user"
-                onClick={() => handelDelete(user._id)}
-              >
-                <MdDeleteForever
-                  style={{ fontSize: "40px", cursor: "pointer", color: "red" }}
-                />
-              </td>
+              {user.role != "admin" && (
+                <td
+                  data-toggle="tooltip"
+                  title="Delete this user"
+                  onClick={() => handelDelete(user._id)}
+                >
+                  <MdDeleteForever
+                    style={{
+                      fontSize: "40px",
+                      cursor: "pointer",
+                      color: "red",
+                    }}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

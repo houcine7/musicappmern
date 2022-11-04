@@ -32,7 +32,7 @@ export const getUsers = async () => {
   }
 };
 
-// delete user from db
+// delete a user from db
 export const deleteUser = async (idUser) => {
   try {
     const result = await axios.delete(
@@ -45,7 +45,7 @@ export const deleteUser = async (idUser) => {
   }
 };
 
-// update user role
+// update a user role
 export const updateUserRole = async (id, role) => {
   //
   try {
@@ -116,6 +116,19 @@ export const deleteSong = async (id) => {
   try {
     const result = await axios.delete(apiURL + "api/songs/deleteSong/" + id);
     return result.data.msg;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
+// add album to db
+
+export const addAlbum = async (data) => {
+  //
+  try {
+    const result = await axios.post(apiURL + "api/albums/addAlbum", data);
+    return result.data.response;
   } catch (error) {
     console.log(error.message);
     return null;

@@ -1,9 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { useStateValue } from "../../context/contextProvider";
 
+import { addAlbum } from "../../api";
+
+// firebase imports
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+  deleteObject,
+} from "firebase/storage";
+
+import { database } from "../../config/firebase.config";
+
+// cte
+const initialState = {
+  imageURL: "",
+  name: "",
+  songsNumber: "",
+};
+
+//
+
 const DashboardAlbums = () => {
-  const [{ allAlbums }, dispatch] = useStateValue();
+  const [{ allAlbums }, dispatch] = useStateValue(initialState);
+  const [formStates, setFormStates] = useState();
+
+  // get input fields info
+
+  const handelChange = (e) => {
+    //
+    setFormStates((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+    console.log(formStates);
+  };
+
+  // upload album image to firebase database function :
+  const uploadImage = (e) => {
+    const fileToUpload = e.target.files[0];
+    const databaseRef = ref(
+      database,
+      "images" + `/${Date.now()}-${fileToUpload.name}`
+    );
+
+    const uploadTask = uploadBytesResumable(databaseRef, fileToUpload);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //upload progress here
+        const progress = snapshot.bytesTransferred / snapshot.totalBytes;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          //upload url
+          setFormStates((prevState) => {
+            return {
+              ...prevState,
+              imageURL: downloadURL,
+            };
+          });
+          console.log(formStates);
+        });
+      }
+    );
+  };
+
+  const handelAddAlbum = () => {
+    //saving album to mongodb
+    const result = addAlbum(formStates);
+    console.log(result);
+  };
+
   return (
     <>
       <div className="container pt-3"></div>
@@ -30,7 +104,7 @@ const DashboardAlbums = () => {
         </div>
       </div>
 
-      <div className="addAlbum container pt-5 pb-5 mt-3">
+      <div className="addAlbum container pt-5 pb-5 mt-5">
         <h3 className="title pb-2">Add album</h3>
         <form>
           <div className="row pb-3">
@@ -38,7 +112,12 @@ const DashboardAlbums = () => {
               <label className="form-label" htmlFor="albumImage">
                 Album image
               </label>
-              <input type="file" className="form-control" id="albumImage" />
+              <input
+                type="file"
+                className="form-control"
+                id="albumImage"
+                onChange={(e) => uploadImage(e)}
+              />
             </div>
             <div className="col-lg-4">
               <label htmlFor="albumName" className="form-label">
@@ -47,8 +126,10 @@ const DashboardAlbums = () => {
               <input
                 id="albumName"
                 className="form-control"
+                name="name"
                 type="text"
                 placeholder="name album"
+                onChange={(e) => handelChange(e)}
               />
             </div>
             <div className="col-lg-4">
@@ -57,13 +138,17 @@ const DashboardAlbums = () => {
               </label>
               <input
                 id="songsNumber"
+                name="songsNumber"
                 className="form-control"
                 type="number"
-                placeholder="name album"
+                placeholder="Songs number"
+                onChange={(e) => handelChange(e)}
               />
             </div>
           </div>
-          <button className="btn btn-primary">Add Album</button>
+          <button className="btn btn-primary" onClick={handelAddAlbum}>
+            Add Album
+          </button>
         </form>
       </div>
     </>

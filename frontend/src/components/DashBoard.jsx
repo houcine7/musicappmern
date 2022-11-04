@@ -23,11 +23,14 @@ const constant = [
   "Artists",
 ];
 const DashBoard = () => {
-  const [{ allUsers, allSongs, allAlbums, allArtists }, dispatch] =
+  const [{ user, allUsers, allSongs, allAlbums, allArtists }, dispatch] =
     useStateValue();
 
   useEffect(() => {
     //
+    // if (user?.role != "admin") {
+    //   window.location.replace("/");
+    // }
     const fetchData = async () => {
       if (allUsers == null) {
         const data = await getUsers().then((users) => users);
@@ -74,16 +77,18 @@ const DashBoard = () => {
           ))}
         </div>
       </div>
-      <div className="pt-5">
-        <Routes>
-          <Route path="/home" element={<DashBoardHome />} />
-          <Route path="/users" element={<DashboardUsers />} />
-          <Route path="/songs" element={<DashboardSongs />} />
-          <Route path="/artists" element={<DashboardArtist />} />
-          <Route path="/albums" element={<DashboardAlbums />} />
-          <Route path="songs/addsong" element={<AddSong />} />
-        </Routes>
-      </div>
+      {user?.role === "admin" && (
+        <div className="pt-5">
+          <Routes>
+            <Route path="/home" element={<DashBoardHome />} />
+            <Route path="/users" element={<DashboardUsers />} />
+            <Route path="/songs" element={<DashboardSongs />} />
+            <Route path="/artists" element={<DashboardArtist />} />
+            <Route path="/albums" element={<DashboardAlbums />} />
+            <Route path="songs/addsong" element={<AddSong />} />
+          </Routes>
+        </div>
+      )}
     </>
   );
 };
