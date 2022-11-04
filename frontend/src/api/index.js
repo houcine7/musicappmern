@@ -134,3 +134,14 @@ export const addAlbum = async (data) => {
     return null;
   }
 };
+
+//
+export const deleteAlbum = async (id) => {
+  try {
+    const result = await axios.delete(apiURL + "api/albums/deleteAlbum/" + id);
+    return result.data.response;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};

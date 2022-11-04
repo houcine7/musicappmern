@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { useStateValue } from "../../context/contextProvider";
 
-import { addAlbum } from "../../api";
+import { addAlbum, deleteAlbum } from "../../api";
 
 // firebase imports
-import {
-  getStorage,
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-  deleteObject,
-} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 import { database } from "../../config/firebase.config";
 
@@ -97,6 +91,7 @@ const DashboardAlbums = () => {
                   name={item.name}
                   imageURL={item.imageURL}
                   songsNumber={item.songsNumber}
+                  id={item._id}
                 />
               );
             })}
@@ -155,7 +150,7 @@ const DashboardAlbums = () => {
   );
 };
 
-const AlbumsCard = ({ name, imageURL, songsNumber }) => {
+const AlbumsCard = ({ name, imageURL, songsNumber, id }) => {
   //
   return (
     <div
@@ -180,6 +175,10 @@ const AlbumsCard = ({ name, imageURL, songsNumber }) => {
         </div>
         <MdDeleteForever
           style={{ fontSize: "30px", cursor: "pointer", color: "red" }}
+          onClick={() => {
+            deleteAlbum(id);
+            window.location.reload();
+          }}
         />
       </div>
     </div>
