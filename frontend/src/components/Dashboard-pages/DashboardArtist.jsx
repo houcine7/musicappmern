@@ -7,11 +7,11 @@ const DashboardArtist = () => {
   const [{ allArtists }, dispatch] = useStateValue();
 
   return (
-    <div className="container ">
-      <table className="table ">
+    <div className="container d-flex justify-content-center position-relative">
+      <table className="table table-striped table-responsive">
         <thead>
           <tr>
-            <th scope="col">Artist Image</th>
+            <th scope="col">Image</th>
             <th scope="col">Name</th>
             <th scope="col">Instagram</th>
           </tr>

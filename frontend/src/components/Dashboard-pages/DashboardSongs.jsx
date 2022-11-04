@@ -61,13 +61,13 @@ const SongsCard = ({ image, name, artist, songId }) => {
   return (
     <div
       className="card text-left align-items-center mb-3"
-      style={{ width: "200px", borderRadius: "15px" }}
+      style={{ width: "230px", borderRadius: "15px", height: "294px" }}
     >
       <img
         className="card-img-top"
         src={image}
         alt="imgsong"
-        style={{ height: "150px", width: "100%" }}
+        style={{ height: "190px", width: "100%", borderRadius: "15px" }}
       />
 
       <div className="w-100 d-flex justify-content-between align-items-center p-3">
@@ -77,6 +77,7 @@ const SongsCard = ({ image, name, artist, songId }) => {
         </div>
         <MdDeleteForever
           style={{ fontSize: "30px", cursor: "pointer", color: "red" }}
+          className="delete-icon"
           onClick={() => {
             deleteSong(songId)
               .then((msg) => {

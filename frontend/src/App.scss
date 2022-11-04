@@ -155,3 +155,39 @@ body::-webkit-scrollbar-thumb {
 .form-control {
   box-shadow: #6dff63 !important;
 }
+
+/*BUTTONS */
+
+.btn {
+  transition: 0.6s;
+}
+
+.btn:hover {
+  scale: 0.9;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.card-img-top {
+  transition: 0.4;
+}
+
+.card:hover {
+  .card-img-top {
+    scale: 1.1;
+  }
+}
+
+.delete-icon .edit-icon {
+  transition: 0.3;
+}
+.delete-icon:hover {
+  color: rgba(160, 58, 58, 0.548);
+  scale: 1.1;
+}
+
+.edit-icon:hover {
+  scale: 1.1;
+}

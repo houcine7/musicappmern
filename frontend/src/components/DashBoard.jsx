@@ -27,10 +27,6 @@ const DashBoard = () => {
     useStateValue();
 
   useEffect(() => {
-    //
-    // if (user?.role != "admin") {
-    //   window.location.replace("/");
-    // }
     const fetchData = async () => {
       if (allUsers == null) {
         const data = await getUsers().then((users) => users);

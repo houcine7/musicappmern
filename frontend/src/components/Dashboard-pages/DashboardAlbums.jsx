@@ -111,6 +111,7 @@ const DashboardAlbums = () => {
                 type="file"
                 className="form-control"
                 id="albumImage"
+                required
                 onChange={(e) => uploadImage(e)}
               />
             </div>
@@ -124,6 +125,7 @@ const DashboardAlbums = () => {
                 name="name"
                 type="text"
                 placeholder="name album"
+                required
                 onChange={(e) => handelChange(e)}
               />
             </div>
@@ -137,6 +139,7 @@ const DashboardAlbums = () => {
                 className="form-control"
                 type="number"
                 placeholder="Songs number"
+                required
                 onChange={(e) => handelChange(e)}
               />
             </div>
@@ -155,7 +158,12 @@ const AlbumsCard = ({ name, imageURL, songsNumber, id }) => {
   return (
     <div
       className="card text-left"
-      style={{ width: "230px", borderRadius: "15px" }}
+      style={{
+        width: "245px",
+        borderRadius: "15px",
+        height: "294px",
+        overflow: "hidden",
+      }}
     >
       <img
         className="image-fluid"
@@ -175,6 +183,7 @@ const AlbumsCard = ({ name, imageURL, songsNumber, id }) => {
         </div>
         <MdDeleteForever
           style={{ fontSize: "30px", cursor: "pointer", color: "red" }}
+          className="delete-icon"
           onClick={() => {
             deleteAlbum(id);
             window.location.reload();

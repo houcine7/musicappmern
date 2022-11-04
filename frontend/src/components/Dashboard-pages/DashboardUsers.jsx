@@ -93,7 +93,12 @@ const DashboardUsers = () => {
                 onClick={() => handelUpdate(user._id, user.role)}
               >
                 {user.role}{" "}
-                <FaUserEdit style={{ fontSize: "40px", cursor: "pointer" }} />
+              </td>
+              <td>
+                <FaUserEdit
+                  style={{ fontSize: "40px", cursor: "pointer" }}
+                  className="edit-icon"
+                />
               </td>
               {user.role != "admin" && (
                 <td
@@ -107,6 +112,7 @@ const DashboardUsers = () => {
                       cursor: "pointer",
                       color: "red",
                     }}
+                    className="delete-icon"
                   />
                 </td>
               )}
