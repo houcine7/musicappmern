@@ -7,8 +7,8 @@ const DashboardArtist = () => {
   const [{ allArtists }, dispatch] = useStateValue();
 
   return (
-    <div className="container d-flex justify-content-center position-relative">
-      <table className="table table-striped table-responsive">
+    <div className="container d-flex justify-content-center position-relativ table-responsive">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col">Image</th>
@@ -19,7 +19,7 @@ const DashboardArtist = () => {
         <tbody>
           {allArtists?.map((artist, index) => (
             <tr key={index}>
-              <td>
+              <td colSpan="1">
                 <img
                   src={artist.imageURL}
                   alt="artist"
@@ -28,8 +28,8 @@ const DashboardArtist = () => {
                   style={{ width: "40px", height: "45px" }}
                 />
               </td>
-              <td>{artist.name}</td>
-              <td>
+              <td colSpan="1">{artist.name}</td>
+              <td colSpan="1">
                 <a href={artist.instagram}>
                   <span>
                     <FiInstagram style={{ fontSize: "35px" }} />

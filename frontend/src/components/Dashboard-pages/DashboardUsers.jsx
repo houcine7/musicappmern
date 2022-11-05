@@ -7,6 +7,9 @@ import { FaUserEdit } from "react-icons/fa";
 import Alert from "../Alert";
 import { useState } from "react";
 
+//moment
+import moment from "moment";
+
 const initialAlertState = {
   display: "none",
   msg: "",
@@ -68,7 +71,7 @@ const DashboardUsers = () => {
             <th scope="col">Image</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">crated</th>
+            <th scope="col">created</th>
             <th scope="col">Role</th>
           </tr>
         </thead>
@@ -86,7 +89,7 @@ const DashboardUsers = () => {
               </td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.createdAt}</td>
+              <td>{moment(user.createdAt).fromNow()}</td>
               <td
                 data-toggle="tooltip"
                 title="edit role"
