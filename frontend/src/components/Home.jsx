@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import Nav from "./Nav";
 import Hero from "./Hero";
-import MusicPlayer from "./Music/MusicPlayer";
+import { MusicPlayer, PlayListCards } from "./Music/MusicPlayer";
+
 import { useStateValue } from "../context/contextProvider";
 
 import { getSongs, getArtists, getAlbums } from "../api";
+import { Fade } from "react-awesome-reveal";
+
 const Home = ({ setLoggedIn }) => {
-  const [{ allSongs, allAlbums, allArtists }, dispatch] = useStateValue();
+  const [{ allSongs, allAlbums, allArtists, playListIsDisplaying }, dispatch] =
+    useStateValue();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +35,12 @@ const Home = ({ setLoggedIn }) => {
           allArtists: data,
         });
       }
+      if (playListIsDisplaying == false) {
+        dispatch({
+          type: "SET_PLAYLIST_IS_DISPLAYING",
+          playListIsDisplaying: true,
+        });
+      }
     };
     fetchData();
   }, []);
@@ -39,16 +49,20 @@ const Home = ({ setLoggedIn }) => {
       <div className="position-relative">
         <Nav setLoggedIn={setLoggedIn} />
       </div>
-      <div className="position-relative">
-        <Hero />
+      <Hero />
+      <div className="position-relative pb-7">
         {allSongs != null && (
           <div
-            className="position-absolute bottom-0  bg-whitesmoke border"
+            className="position-fixed bottom-0  bg-whitesmoke border"
             style={{ left: "0", right: "0" }}
           >
-            <MusicPlayer song={allSongs[0]} />
+            <div></div>
+            <Fade direction="up">
+              <MusicPlayer song={allSongs[0]} />
+            </Fade>
           </div>
         )}
+        {playListIsDisplaying && <PlayListCards />}
       </div>
     </>
   );

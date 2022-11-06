@@ -1,0 +1,47 @@
+.rhap_progress-filled,
+.rhap_progress-indicator {
+  background-color: #28f1ff !important;
+}
+
+.rhap_play-pause-button {
+  color: #28f1ff !important;
+  transition: 0.4s;
+  &:hover {
+    scale: 1.1;
+  }
+}
+.rhap_main-controls-button {
+  transition: 0.4s;
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.rhap_download-progress {
+  background-color: #28f1ff38;
+}
+
+.rhap_repeat-button,
+.rhap_volume-button,
+.playlist-icon {
+  color: rgb(109, 255, 99) !important;
+  transition: 0.4s;
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.rhap_volume-indicator {
+  background-color: rgb(109, 255, 99) !important;
+}
+
+.playlist-card {
+  background: rgb(248 249 250);
+  .song-card {
+    transition: 0.4;
+    cursor: pointer;
+    &:hover {
+      background-color: #28f1ff;
+    }
+  }
+}

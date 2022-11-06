@@ -5,9 +5,28 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
 import { TbPlaylist } from "react-icons/tb";
-const MusicPlayer = ({ song }) => {
-  const [{ allSongs, allArtists, allAlbums }, dispatch] = useStateValue();
 
+import { FcMusic } from "react-icons/fc";
+import { Fade } from "react-awesome-reveal";
+
+export const MusicPlayer = ({ song }) => {
+  const [{ allSongs, allArtists, allAlbums, playListIsDisplaying }, dispatch] =
+    useStateValue();
+
+  const handelClick = () => {
+    //show or hide playlist
+    if (playListIsDisplaying == false) {
+      dispatch({
+        type: "SET_PLAYLIST_IS_DISPLAYING",
+        playListIsDisplaying: true,
+      });
+    } else {
+      dispatch({
+        type: "SET_PLAYLIST_IS_DISPLAYING",
+        playListIsDisplaying: false,
+      });
+    }
+  };
   return (
     <div className="container-fluid d-flex justify-content-center">
       <div className="w-100 position-relative d-flex justify-content-center">
@@ -35,14 +54,21 @@ const MusicPlayer = ({ song }) => {
             </span>
           </p>
           <TbPlaylist
-            style={{ fontSize: "30px", color: "#6dff63", fontWeight: "600" }}
+            style={{
+              fontSize: "30px",
+              color: "#6dff63",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+            className="playlist-icon"
+            onClick={handelClick}
           />
         </div>
         <div className="flex-1 flex-grow-1 justify-content-center">
           <AudioPlayer
             src={song.songURL}
             onPlay={() => console.log("playing ...")}
-            autoPlay={true}
+            autoPlay={false}
             showSkipControls={true}
             /*onClickNext ={}
             onClickPrevious ={}
@@ -55,4 +81,50 @@ const MusicPlayer = ({ song }) => {
   );
 };
 
-export default MusicPlayer;
+export const PlayListCards = () => {
+  const [{ allSongs }, dispatch] = useStateValue();
+
+  return (
+    <Fade>
+      <div
+        className="position-fixed playlist-card border"
+        style={{
+          zIndex: "3",
+          bottom: "92px",
+          left: "40px",
+          width: "300px",
+          height: "60%",
+        }}
+      >
+        <div className="p-2 w-100 d-flex flex-column gap-3">
+          {allSongs?.map((song) => {
+            return <PlayListSongCard song={song} />;
+          })}
+        </div>
+      </div>
+    </Fade>
+  );
+};
+
+const PlayListSongCard = ({ song }) => {
+  const [{ allArtists }, dispatch] = useStateValue();
+  return (
+    <Fade direction="left">
+      <div className="container d-flex gap-1 song-card">
+        <div className="card-icon">
+          <FcMusic style={{ fontSize: "30px", color: "black" }} />
+        </div>
+        <div className="d-flex flex-column">
+          <b className="text-bold">
+            {song?.name}({song?.category})
+          </b>
+          <p>
+            {allArtists?.map((artist) => {
+              if (artist._id == song.artist) return artist.name;
+            })}
+          </p>
+        </div>
+      </div>
+    </Fade>
+  );
+};

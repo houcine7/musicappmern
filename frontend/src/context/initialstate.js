@@ -4,4 +4,5 @@ export const initialState = {
   allUsers: null,
   allAlbums: null,
   allArtists: null,
+  playListIsDisplaying: false,
 };
