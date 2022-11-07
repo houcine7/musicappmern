@@ -12,6 +12,7 @@ const Home = ({ setLoggedIn }) => {
   const [{ allSongs, allAlbums, allArtists, playListIsDisplaying }, dispatch] =
     useStateValue();
 
+  //
   useEffect(() => {
     const fetchData = async () => {
       if (allSongs == null) {
@@ -35,17 +36,21 @@ const Home = ({ setLoggedIn }) => {
           allArtists: data,
         });
       }
-      if (playListIsDisplaying == false) {
-        dispatch({
-          type: "SET_PLAYLIST_IS_DISPLAYING",
-          playListIsDisplaying: true,
-        });
-      }
     };
     fetchData();
   }, []);
+
+  const hidePlayListOnClick = () => {
+    if (playListIsDisplaying == true) {
+      dispatch({
+        type: "SET_PLAYLIST_IS_DISPLAYING",
+        playListIsDisplaying: false,
+      });
+    }
+  };
+
   return (
-    <>
+    <div onClick={hidePlayListOnClick}>
       <div className="position-relative">
         <Nav setLoggedIn={setLoggedIn} />
       </div>
@@ -58,13 +63,13 @@ const Home = ({ setLoggedIn }) => {
           >
             <div></div>
             <Fade direction="up">
-              <MusicPlayer song={allSongs[0]} />
+              <MusicPlayer />
             </Fade>
           </div>
         )}
         {playListIsDisplaying && <PlayListCards />}
       </div>
-    </>
+    </div>
   );
 };
 

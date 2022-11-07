@@ -5,6 +5,7 @@ export const actionType = {
   SET_ALL_ARTISTS: "SET_ALL_ARTISTS",
   SET_ALL_SONGS: "SET_ALL_SONGS",
   SET_PLAYLIST_IS_DISPLAYING: "SET_PLAYLIST_IS_DISPLAYING",
+  SET_CUERRENT_SONG: "SET_CUERRENT_SONG",
 };
 
 const reducer = (state, action) => {
@@ -38,6 +39,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         playListIsDisplaying: action.playListIsDisplaying,
+      };
+    case actionType.SET_CUERRENT_SONG:
+      return {
+        ...state,
+        currentSong: action.currentSong,
       };
 
     default:

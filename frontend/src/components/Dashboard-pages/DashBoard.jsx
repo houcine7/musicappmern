@@ -1,20 +1,20 @@
 import React from "react";
-import Nav from "./Nav";
+import Nav from "../Nav";
 import { AiFillHome } from "react-icons/ai";
 
 import DashboardLinks from "./DashboardLinks";
 import { Route, Routes } from "react-router-dom";
-import DashBoardHome from "./Dashboard-pages/DashBoardHome";
-import DashboardUsers from "./Dashboard-pages/DashboardUsers";
-import DashboardSongs from "./Dashboard-pages/DashboardSongs";
-import DashboardArtist from "./Dashboard-pages/DashboardArtist";
-import DashboardAlbums from "./Dashboard-pages/DashboardAlbums";
-import AddSong from "./Dashboard-pages/AddSong";
-import { useStateValue } from "../context/contextProvider";
+import DashBoardHome from "./DashBoardHome";
+import DashboardUsers from "./DashboardUsers";
+import DashboardSongs from "./DashboardSongs";
+import DashboardArtist from "./DashboardArtist";
+import DashboardAlbums from "./DashboardAlbums";
+import AddSong from "./AddSong";
+import { useStateValue } from "../../context/contextProvider";
 import { useEffect } from "react";
-import { CardsContent } from "../data/CardsDashboardData";
+import { CardsContent } from "../../data/CardsDashboardData";
 
-import { getSongs, getUsers, getAlbums, getArtists } from "../api/index";
+import { getSongs, getUsers, getAlbums, getArtists } from "../../api/index";
 const constant = [
   <AiFillHome style={{ fontSize: "40px" }} />,
   "Users",

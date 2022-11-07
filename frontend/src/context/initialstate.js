@@ -5,4 +5,5 @@ export const initialState = {
   allAlbums: null,
   allArtists: null,
   playListIsDisplaying: false,
+  currentSong: null,
 };

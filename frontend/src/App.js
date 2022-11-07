@@ -11,7 +11,7 @@ import { getAuth } from "firebase/auth";
 import { valideUser } from "./api";
 //context
 import { useStateValue } from "./context/contextProvider";
-import DashBoard from "./components/DashBoard";
+import DashBoard from "./components/Dashboard-pages/DashBoard";
 function App() {
   //to track user sign in state
   const authentication = getAuth(app);

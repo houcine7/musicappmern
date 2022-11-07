@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useStateValue } from "../../context/contextProvider";
 
 import AudioPlayer from "react-h5-audio-player";
@@ -9,9 +9,20 @@ import { TbPlaylist } from "react-icons/tb";
 import { FcMusic } from "react-icons/fc";
 import { Fade } from "react-awesome-reveal";
 
-export const MusicPlayer = ({ song }) => {
-  const [{ allSongs, allArtists, allAlbums, playListIsDisplaying }, dispatch] =
-    useStateValue();
+export const MusicPlayer = () => {
+  const [
+    { allSongs, allArtists, allAlbums, playListIsDisplaying, currentSong },
+    dispatch,
+  ] = useStateValue();
+
+  useEffect(() => {
+    if (currentSong == null) {
+      dispatch({
+        type: "SET_CUERRENT_SONG",
+        currentSong: allSongs[0],
+      });
+    }
+  });
 
   const handelClick = () => {
     //show or hide playlist
@@ -31,7 +42,7 @@ export const MusicPlayer = ({ song }) => {
     <div className="container-fluid d-flex justify-content-center">
       <div className="w-100 position-relative d-flex justify-content-center">
         <img
-          src={song.imageURL}
+          src={currentSong?.imageURL}
           className="img-fluid rounded"
           alt="song cover image"
           style={{ maxWidth: "90px" }}
@@ -41,15 +52,15 @@ export const MusicPlayer = ({ song }) => {
           style={{ marginLeft: "1rem", marginRight: "1rem" }}
         >
           <b className="pl-2">
-            {song.name}({song.category[0]})
+            {currentSong?.name}({currentSong?.category[0]})
           </b>
           <p className="artist name" style={{ margin: "0" }}>
             {allArtists?.map((artist) => {
-              if (song.artist == artist._id) return artist.name;
+              if (currentSong?.artist == artist._id) return artist.name;
             })}{" "}
             <span className="album">
               {allAlbums?.map((album) => {
-                if (song.album == album._id) return album.name;
+                if (currentSong?.album == album._id) return album.name;
               })}
             </span>
           </p>
@@ -66,7 +77,7 @@ export const MusicPlayer = ({ song }) => {
         </div>
         <div className="flex-1 flex-grow-1 justify-content-center">
           <AudioPlayer
-            src={song.songURL}
+            src={currentSong?.songURL}
             onPlay={() => console.log("playing ...")}
             autoPlay={false}
             showSkipControls={true}
@@ -107,10 +118,25 @@ export const PlayListCards = () => {
 };
 
 const PlayListSongCard = ({ song }) => {
-  const [{ allArtists }, dispatch] = useStateValue();
+  const [{ allArtists, currentSong }, dispatch] = useStateValue();
+
+  const changePlyingSong = () => {
+    dispatch({
+      type: "SET_CUERRENT_SONG",
+      currentSong: song,
+    });
+  };
   return (
     <Fade direction="left">
-      <div className="container d-flex gap-1 song-card">
+      <div
+        className="container d-flex gap-1 song-card"
+        style={
+          song._id == currentSong._id
+            ? { transition: "0.1s", background: "#28f1ff" }
+            : { transition: "0.1s" }
+        }
+        onClick={changePlyingSong}
+      >
         <div className="card-icon">
           <FcMusic style={{ fontSize: "30px", color: "black" }} />
         </div>
