@@ -1,2 +1,11 @@
 @import url("./styles/login.scss");
 @import url("./styles/musicPlayer.scss");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0 !important;
+}

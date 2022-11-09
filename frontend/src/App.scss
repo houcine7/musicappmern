@@ -197,3 +197,28 @@ body::-webkit-scrollbar-thumb {
 td {
   vertical-align: middle;
 }
+
+/* CATEGORY CARDS */
+
+.category-card {
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    .category-icon {
+      scale: 1.1;
+    }
+    .category-name {
+      color: #28f1ff;
+    }
+  }
+}
+
+.imgCategorycontainer {
+  padding-top: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.pointer {
+  cursor: pointer;
+}

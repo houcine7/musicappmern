@@ -7,6 +7,11 @@ import { useStateValue } from "../context/contextProvider";
 
 import { getSongs, getArtists, getAlbums } from "../api";
 import { Fade } from "react-awesome-reveal";
+import { CardsContent } from "../data/CategoryCardsData";
+import CategoryCards from "./Music/CategoryCards";
+
+import { Route, Routes } from "react-router-dom";
+import SongsByCategory from "./SongsByCategory";
 
 const Home = ({ setLoggedIn }) => {
   const [{ allSongs, allAlbums, allArtists, playListIsDisplaying }, dispatch] =
@@ -54,7 +59,33 @@ const Home = ({ setLoggedIn }) => {
       <div className="position-relative">
         <Nav setLoggedIn={setLoggedIn} />
       </div>
-      <Hero />
+      <Routes>
+        <Route
+          path="/home"
+          element={
+            <>
+              <Hero />
+              <section
+                className="d-flex justify-content-center gap-3"
+                style={{ paddingBottom: "7rem" }}
+              >
+                {CardsContent.map((card, index) => {
+                  return <CategoryCards card={card} key={index} />;
+                })}
+              </section>
+            </>
+          }
+        />
+        <Route
+          path="/home/categorys/pop"
+          element={
+            <>
+              <SongsByCategory />
+            </>
+          }
+        />
+      </Routes>
+
       <div className="position-relative pb-7">
         {allSongs != null && (
           <div
