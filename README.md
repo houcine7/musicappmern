@@ -22,3 +22,8 @@
 ### when you select a category a playlist shows up contains only songs with the selected category 
 
 ![Screenshot 2022-11-10 161627](https://user-images.githubusercontent.com/92301230/201133670-cc560b94-c33f-46cf-877f-1250839af545.jpg)
+
+
+# Admin Dashboard
+
+## If you are an admin you can access a dashboard that contains information about songs, users, albums and artists
