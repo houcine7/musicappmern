@@ -27,3 +27,6 @@
 # Admin Dashboard
 
 ## If you are an admin you can access a dashboard that contains information about songs, users, albums and artists
+
+### an admin can track the number of users,songs,albums,artists
+![Screenshot 2022-11-10 162234](https://user-images.githubusercontent.com/92301230/201135762-aa1beade-17b3-4f39-8301-e6aea4fa0c40.jpg)
