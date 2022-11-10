@@ -31,5 +31,9 @@
 ### an admin can track the number of users,songs,albums,artists
 ![Screenshot 2022-11-10 162234](https://user-images.githubusercontent.com/92301230/201135762-aa1beade-17b3-4f39-8301-e6aea4fa0c40.jpg)
 
-### an admin can get users list , delete a user and update the role of a the user.
+### an admin can get users list , delete a user and update the role a user.
 ![Screenshot 2022-11-10 162259](https://user-images.githubusercontent.com/92301230/201136370-b784d8c8-5b61-40aa-a72b-2e5f8a3126fe.jpg)
+
+### admin can also get songs list delete and add a song
+![Screenshot 2022-11-10 162342](https://user-images.githubusercontent.com/92301230/201136895-203a08a1-5593-4ca2-8ade-b5bb55603158.jpg)
+![Screenshot 2022-11-10 162408](https://user-images.githubusercontent.com/92301230/201136905-87cfe451-5818-44d3-82a4-ad78a13fb03c.jpg)
