@@ -17,3 +17,8 @@
 ### You may select a category of songs.
 
 ![SharedScreenshot](https://user-images.githubusercontent.com/92301230/201133158-8d106f56-d13e-4e63-b8fa-06980839bb82.jpg)
+
+
+### when you select a category a playlist shows up contains only songs with the selected category 
+
+![Screenshot 2022-11-10 161627](https://user-images.githubusercontent.com/92301230/201133670-cc560b94-c33f-46cf-877f-1250839af545.jpg)
