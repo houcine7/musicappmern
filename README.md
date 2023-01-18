@@ -1,6 +1,6 @@
 # musicappmern
 
-#### web application for music build with mern stack 
+#### web application for music built with mern stack 
 
 
 # Login page 
